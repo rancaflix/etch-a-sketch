@@ -1,0 +1,18 @@
+body {
+    background-color: rgb(188, 248, 228);
+}
+
+.board {
+    height: 1000px;
+    width: 1000px;
+    max-height: 1000px;
+    max-width: 1000px;
+}
+
+.row {
+   display: flex; 
+}
+
+.newBox {
+    display: inline;
+}
