@@ -1,28 +1,55 @@
-const container = document.createElement('div');
 const body = document.body;
+const container = document.getElementById("container");
 container.style.backgroundColor = 'pink';
-body.appendChild(container);
 
-// early mechanics of changing number of rows and columns
-let isNumber = Number.isInteger || function(number){ return !isNaN(parseFloat(n)) && isFinite(n) };
-let result = prompt("Enter your number");
-if (!isNumber(result)){
-   prompt("Please try again and enter your number");
+// clear button function
+let clearButton = document.getElementById("clear");
+clearButton.addEventListener("click", function(){
+    newBoxArray.forEach(element => {
+        element.style.backgroundColor = "pink";
+    })
+});
+
+// Range slider
+const slider = document.getElementById("myRange");
+let output = document.getElementById("demo");
+output.innerHTML = `${slider.value}x${slider.value}`; // Display the default slider value
+
+// Board and slider
+let result = 16;
+slider.oninput = function() {
+  output.innerHTML = `${this.value}x${this.value}`;
+  result = this.value;
 }
-
-// board
+// create board
 let board = document.createElement('div');
 board.className = 'board';
+let factor = 800 / result ;
+
+// loop creating divs on board
 for (let i = 0; i < result; i++) {
     row = document.createElement('div');
     row.className = 'row';
     for (let j = 0; j < result; j++) {
         let newBox = document.createElement('div');
-        newBox.className = 'newbox';
-        newBox.textContent = j;
+        newBox.className = 'newBox';
         row.appendChild(newBox);
+        newBox.style.cssText = `min-width: ${factor}px; min-height: ${factor}px`;
     }
     board.appendChild(row);
 }
-
 container.appendChild(board);
+
+// apply button
+let applyButton = document.getElementById("apply");
+applyButton.addEventListener("click", function(e){console.log("apply")});
+
+// hover element
+let newBox = document.getElementsByClassName("newBox");
+let newBoxArray = Array.prototype.slice.call(newBox);
+
+newBoxArray.forEach(element => {
+    element.addEventListener("mouseenter", function(){
+        this.style.backgroundColor = "black";
+    });
+});
